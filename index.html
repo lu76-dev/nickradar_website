@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="nickradar — the nickname contacting game at your event. write your nickname on a sticker, enter the party code, and let the game begin.">
+  <meta name="keywords" content="nickradar, nickname party, event, contacting game, party code, club, austria, no swiping">
+  <meta name="author" content="nickradar">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="nickradar — the nickname party game">
+  <meta property="og:description" content="the nickname contacting game at your event. write your nickname on a sticker, enter the party code, and let the game begin.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nickradar.com">
+  <meta property="og:site_name" content="nickradar">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="nickradar — the nickname party game">
+  <meta name="twitter:description" content="the nickname contacting game at your event. write your nickname, enter the party code, play.">
+  <title>nickradar — the nickname party game.</title>
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Share+Tech&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'Share Tech Mono';
+      src: url('/ShareTechMono.woff2') format('woff2');
+      font-weight: normal; font-style: normal; font-display: swap;
+    }
+    :root {
+      --bg: #ffffff;
+      --bg2: #f5f5f5;
+      --text: #111111;
+      --text-dim: #555555;
+      --green: #00ff41;
+      --green-dark: #009922;
+      --green-dim: #ccffdd;
+      --border: #dddddd;
+      --mono: 'Share Tech Mono', 'Courier New', monospace;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--bg); color: var(--text); font-family: var(--mono); overflow-x: hidden; cursor: default; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(255,255,255,0.97); backdrop-filter: blur(8px); overflow: visible; }
+    .nav-top { padding: 0 24px; display: flex; align-items: center; height: 52px; }
+    .nav-logo { font-size: 18px; font-weight: 700; letter-spacing: 4px; color: var(--text); cursor: pointer; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    .nav-logo img { width: 26px; height: 26px; object-fit: contain; }
+    .nav-tabs { display: flex; border-bottom: 1px solid var(--border); position: relative; }
+    .nav-tab { flex: 1; text-align: center; font-family: var(--mono); font-size: 11px; letter-spacing: 2px; color: var(--text-dim); padding: 10px 8px; cursor: pointer; text-decoration: none; border-right: 1px solid var(--border); border-top: 3px solid transparent; border-left: 1px solid transparent; border-bottom: 1px solid var(--border); margin-bottom: -1px; transition: all 0.2s; text-transform: uppercase; background: var(--bg2); }
+    .nav-tab:first-child { border-left: none; }
+    .nav-tab:last-child { border-right: none; }
+    .nav-tab:hover { color: var(--text); background: var(--bg); }
+    .nav-tab.active { color: var(--text); font-weight: 700; background: #fff; border-top: 1px solid var(--border); border-left: 1px solid var(--border); border-right: 1px solid var(--border); border-bottom: 1px solid #fff; }
+    .nav-tab.active:first-child { border-left: none; }
+    .nav-tab.green { background: var(--green); color: #111; font-weight: 700; border-top: 3px solid transparent; border-bottom: 1px solid var(--green); }
+    .nav-tab.green:hover { background: #00e63a; }
+
+    /* PAGES */
+    .page { padding-top: 88px; display: none; }
+    .page.active { display: block; }
+
+    /* SHARED */
+    .hero { max-width: 760px; margin: 0 auto; padding: 48px 24px 0; text-align: center; }
+    .hero-logo { font-size: clamp(36px, 10vw, 72px); font-weight: 700; letter-spacing: 8px; color: var(--text); line-height: 1; margin-bottom: 16px; animation: flicker 4s infinite; }
+    @keyframes flicker { 0%,95%,100%{opacity:1}96%{opacity:.8}97%{opacity:1}98%{opacity:.6}99%{opacity:1} }
+    .hero-label { font-size: 13px; letter-spacing: 2px; color: var(--text-dim); margin-bottom: 8px; line-height: 1.8; }
+    .hero-sub { font-size: 13px; color: var(--text-dim); margin-bottom: 24px; letter-spacing: 2px; line-height: 1.8; }
+    .hero-image { width: 100%; display: block; border: 1px solid var(--border); }
+    .hero-badge { display: inline-block; border: 1px solid var(--green-dim); color: var(--green); font-size: 11px; letter-spacing: 2px; padding: 6px 16px; margin-top: 20px; }
+
+    .section { max-width: 760px; margin: 0 auto; padding: 56px 24px; }
+    .section-label { font-size: 11px; letter-spacing: 4px; color: var(--text-dim); margin-bottom: 12px; }
+    .section-title { font-size: clamp(18px, 4vw, 26px); font-weight: 700; letter-spacing: 2px; color: var(--text); margin-bottom: 28px; line-height: 1.2; }
+
+    .steps { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+    .step { background: var(--bg); padding: 24px 32px; display: grid; grid-template-columns: 44px 1fr; gap: 20px; align-items: start; }
+    .step-num { font-size: 22px; font-weight: 700; color: var(--green); }
+    .step-text { font-size: 14px; color: var(--text-dim); line-height: 1.8; padding-top: 4px; }
+    .step-text strong { color: var(--text); }
+
+    .info-box { border: 1px solid var(--border); padding: 28px 32px; background: var(--bg2); }
+    .info-box p { font-size: 14px; color: var(--text-dim); line-height: 1.9; margin-bottom: 14px; }
+    .info-box p:last-child { margin-bottom: 0; }
+
+    .green-box { border: 1px solid var(--green-dim); padding: 28px 32px; text-align: center; background: #f8fff8; }
+    .green-box-label { font-size: 10px; letter-spacing: 4px; color: var(--green); margin-bottom: 10px; }
+    .green-box-title { font-size: 18px; font-weight: 700; letter-spacing: 2px; color: var(--text); margin-bottom: 10px; }
+    .green-box-text { font-size: 13px; color: var(--text-dim); line-height: 1.8; letter-spacing: 1px; }
+    .green-box-text strong { color: var(--green); }
+
+    .arrow-list { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+    .arrow-item { display: flex; align-items: flex-start; gap: 14px; font-size: 13px; color: var(--text-dim); letter-spacing: 1px; line-height: 1.6; }
+    .arrow-item::before { content: '→'; color: var(--green); font-size: 14px; min-width: 16px; margin-top: 2px; }
+
+    .black-section { background: var(--text); color: #fff; padding: 56px 24px; text-align: center; margin-top: 56px; }
+    .black-inner { max-width: 600px; margin: 0 auto; }
+    .black-label { font-size: 10px; letter-spacing: 4px; color: var(--green); margin-bottom: 14px; }
+    .black-title { font-size: clamp(20px, 5vw, 30px); font-weight: 700; letter-spacing: 2px; color: #fff; margin-bottom: 14px; line-height: 1.2; }
+    .black-sub { font-size: 13px; color: #888; line-height: 1.8; letter-spacing: 1px; margin-bottom: 8px; }
+    .black-types { font-size: 11px; color: #555; letter-spacing: 3px; margin-bottom: 32px; }
+    .black-btn { display: inline-block; background: var(--green); color: #111; text-decoration: none; font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 3px; padding: 14px 32px; transition: background 0.2s; }
+    .black-btn:hover { background: #fff; }
+
+    .app-btn { display: inline-block; margin-top: 24px; background: var(--text); color: #fff; text-decoration: none; font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 3px; padding: 12px 28px; transition: background 0.2s; }
+    .app-btn:hover { background: var(--green); color: #111; }
+
+    footer { border-top: 1px solid var(--border); padding: 24px; text-align: center; font-size: 11px; color: #bbb; letter-spacing: 2px; }
+    footer a { color: #bbb; text-decoration: none; }
+    footer a:hover { color: var(--text); }
+
+    @media (max-width: 600px) {
+      .step { grid-template-columns: 32px 1fr; padding: 18px; gap: 12px; }
+      .info-box, .green-box { padding: 20px; }
+    }
+
+    /* LEGAL */
+    .legal-nav { display: flex; gap: 4px; margin-bottom: 36px; flex-wrap: wrap; }
+    .legal-tab { background: none; border: 1px solid var(--border); color: var(--text-dim); font-family: var(--mono); font-size: 11px; letter-spacing: 1px; padding: 8px 16px; cursor: pointer; transition: all 0.2s; }
+    .legal-tab.active, .legal-tab:hover { background: var(--text); color: #fff; border-color: var(--text); }
+    .legal-content { display: none; }
+    .legal-content.active { display: block; }
+    .legal-section { margin-bottom: 32px; }
+    .legal-section h3 { font-size: 12px; font-weight: 700; letter-spacing: 2px; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    .legal-section p, .legal-section li { font-size: 12px; color: var(--text-dim); line-height: 1.9; margin-bottom: 8px; }
+    .legal-section a { color: var(--green); }
+    .legal-section ul { padding-left: 16px; }
+
+    /* PRICING */
+    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 24px; }
+    .price-card { background: var(--bg); padding: 32px 24px; text-align: center; }
+    .price-role { font-size: 11px; letter-spacing: 3px; color: var(--text-dim); margin-bottom: 8px; text-transform: uppercase; }
+    .price-icon { font-size: 28px; margin-bottom: 8px; }
+    .price-amount { font-size: 36px; font-weight: 700; color: var(--text); margin-bottom: 4px; letter-spacing: 2px; }
+    .price-currency { font-size: 20px; vertical-align: super; }
+    .price-when { font-size: 11px; color: var(--green-dark); letter-spacing: 2px; margin-bottom: 16px; }
+    .price-features { list-style: none; padding: 0; text-align: left; }
+    .price-features li { font-size: 12px; color: var(--text-dim); padding: 5px 0; border-bottom: 1px solid var(--border); letter-spacing: 1px; }
+    .price-features li:last-child { border-bottom: none; }
+    .pricing-note { font-size: 12px; color: var(--text-dim); line-height: 1.9; border: 1px solid var(--border); padding: 24px 28px; background: var(--bg2); margin-bottom: 24px; }
+    .pricing-note strong { color: var(--text); }
+
+    /* STICKER */
+    .sticker-wrap { display: flex; justify-content: center; padding: 0 24px 48px; max-width: 760px; margin: 0 auto; }
+    .sticker { border: 2px solid #ccc; color: #000; background: #fff; display: flex; position: relative; box-shadow: 2px 3px 8px rgba(0,0,0,.4); animation: stickerPulse 6s infinite; width: 100%; height: 113px; }
+    .sticker img { width: 44px; height: 44px; object-fit: contain; flex-shrink: 0; position: absolute; top: 10px; left: 14px; }
+    @keyframes stickerPulse {
+      0%,85%,100% { transform: scale(1); box-shadow: 2px 3px 8px rgba(0,0,0,.4); }
+      86% { transform: scale(0.98); }
+      87% { transform: scale(1.01); box-shadow: 2px 3px 12px rgba(0,0,0,.5); }
+      88% { transform: scale(1); }
+      92% { opacity: 0.85; }
+      93% { opacity: 1; }
+      96% { transform: translate(-1px, 0) scale(1); }
+      97% { transform: translate(1px, 0) scale(1); }
+      98% { transform: translate(0,0) scale(1); }
+    }
+
+    /* ANIMATION */
+    .anim-wrap{width:100%;max-width:560px;margin-bottom:0;margin-left:auto;margin-right:auto}
+    .anim-stage{background:#000;border:1px solid #2a6a2a;overflow:hidden}
+    .anim-topbar{height:38px;border-bottom:1px solid #1a4d1a;display:flex;align-items:center;justify-content:space-between;padding:0 20px}
+    .anim-topbar{background:#111;padding:10px 16px;display:flex;justify-content:space-between;align-items:center}
+    .anim-dots{display:flex;gap:7px}
+    .anim-dot{width:7px;height:7px;border:1px solid #444;background:transparent;transition:all .3s;cursor:pointer}
+    .anim-dot.done{background:#444;border-color:#444}
+    .anim-dot.active{background:#00ff41;border-color:#00ff41}
+    .anim-scenes{position:relative;height:320px}
+    .anim-scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 40px;opacity:0;pointer-events:none;transition:opacity .5s ease}
+    .anim-scene.active{opacity:1;pointer-events:all}
+    .anim-lbl{font-size:12px;letter-spacing:4px;color:#00ff41;font-weight:700;margin-bottom:20px;opacity:0;transition:opacity .4s ease}
+    .anim-lbl.show{opacity:1}
+    .anim-visual{margin-bottom:24px;min-height:100px;display:flex;align-items:center;justify-content:center}
+    .anim-txt{font-size:14px;color:#7abf7a;text-align:center;line-height:2;letter-spacing:1px;opacity:0;transform:translateY(6px);transition:opacity .4s ease,transform .4s ease}
+    .anim-txt.show{opacity:1;transform:translateY(0)}
+    .anim-txt em{color:#00ff41;font-style:normal;font-weight:700}
+    .anim-pbar{height:2px;background:#00ff41;width:0%}
+    .anim-sticker{border:2px solid #ccc;padding:14px 28px;font-size:20px;font-weight:700;letter-spacing:3px;color:#000;background:#fff;display:flex;align-items:center;gap:10px;box-shadow:2px 3px 8px rgba(0,0,0,.4);opacity:0;transform:scale(.85);transition:all .5s cubic-bezier(.34,1.4,.64,1)}
+    .anim-sticker.show{opacity:1;transform:scale(1)}
+    .anim-phone{background:#000;border:1.5px solid #2a6a2a;border-radius:12px;padding:8px;width:160px}
+    .anim-p-notch{width:32px;height:5px;border-radius:3px;background:#0a1a0a;margin:0 auto 7px}
+    .anim-p-screen{background:#020d02;border:1px solid #1a4d1a;border-radius:3px;padding:9px}
+    .anim-p-bar{font-size:7px;letter-spacing:2px;color:#2a6a2a;border-bottom:1px solid #1a4d1a;padding-bottom:5px;margin-bottom:7px}
+    .anim-p-input{border:1px solid #00ff41;padding:5px 7px;font-family:'Share Tech Mono',monospace;font-size:10px;color:#00ff41;background:#000;display:flex;align-items:center;gap:3px;margin-bottom:6px;min-height:24px}
+    .anim-pcursor{display:inline-block;width:5px;height:10px;background:#00ff41;animation:anim-blink 1s step-end infinite;flex-shrink:0}
+    @keyframes anim-blink{0%,100%{opacity:1}50%{opacity:0}}
+    .anim-p-result{padding:6px 7px;border:1px solid #1a4d1a;font-size:9px;color:#fff;font-weight:700;letter-spacing:1px;display:flex;justify-content:space-between;margin-bottom:5px;opacity:0;transition:opacity .3s}
+    .anim-p-result.show{opacity:1}
+    .anim-p-btn{background:#00ff41;color:#000;font-family:'Share Tech Mono',monospace;font-size:8px;font-weight:700;letter-spacing:1px;padding:6px;text-align:center;opacity:0;transition:opacity .3s}
+    .anim-p-btn.show{opacity:1}
+    .anim-card{background:#000;border:1px solid #00ff41;padding:16px 20px;width:260px;opacity:0;transform:translateY(8px);transition:all .4s ease}
+    .anim-card.show{opacity:1;transform:translateY(0)}
+    .anim-card-from{font-size:9px;letter-spacing:3px;color:#2a6a2a;margin-bottom:6px}
+    .anim-card-nick{font-size:16px;font-weight:700;color:#fff;letter-spacing:2px;margin-bottom:10px}
+    .anim-card-msg{font-size:11px;color:#7abf7a;line-height:1.6;border-left:2px solid #1a4d1a;padding-left:8px;margin-bottom:14px}
+    .anim-card-btns{display:flex;gap:8px}
+    .anim-btn-yes{flex:1;padding:11px;text-align:center;font-family:'Share Tech Mono',monospace;font-size:14px;font-weight:900;letter-spacing:3px;background:#000;color:#fff;border:2px solid #00ff41;transition:all .3s}
+    .anim-btn-yes.lit{background:#00ff41;color:#000;box-shadow:0 0 20px rgba(0,255,65,.4)}
+    .anim-btn-no{flex:1;padding:11px;text-align:center;font-family:'Share Tech Mono',monospace;font-size:14px;letter-spacing:3px;color:#1a4d1a;border:1px solid #1a4d1a}
+    .anim-match{position:absolute;inset:0;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;opacity:0;pointer-events:none;transition:opacity .4s;z-index:5}
+    .anim-match.show{opacity:1}
+    .anim-match-word{font-size:52px;font-weight:900;letter-spacing:10px;color:#00ff41;text-shadow:0 0 40px rgba(0,255,65,.5);transform:scale(.8);transition:transform .4s cubic-bezier(.34,1.56,.64,1) .1s}
+    .anim-match.show .anim-match-word{transform:scale(1)}
+    .anim-match-sub{font-size:12px;letter-spacing:3px;color:#fff;font-weight:700;opacity:0;transition:opacity .4s ease .4s}
+    .anim-match.show .anim-match-sub{opacity:1}
+    .anim-chat{width:280px}
+    .anim-chat-head{background:#000;border:1px solid #00ff41;padding:9px 12px;display:flex;justify-content:space-between;align-items:center}
+    .anim-chat-nick{font-size:13px;color:#fff;font-weight:700;letter-spacing:2px}
+    .anim-chat-timer{font-size:11px;color:#00ff41;font-weight:700;font-variant-numeric:tabular-nums}
+    .anim-chat-body{background:#000;border:1px solid #1a4d1a;border-top:none;padding:10px;display:flex;flex-direction:column;gap:7px;min-height:110px}
+    .anim-cm{max-width:78%;padding:7px 11px;font-size:11px;line-height:1.6;opacity:0;transition:opacity .4s ease,transform .4s ease}
+    .anim-cm.t{background:#050f05;border:1px solid #1a4d1a;color:#7abf7a;align-self:flex-start;transform:translateX(-6px)}
+    .anim-cm.m{background:#00ff41;color:#000;font-weight:700;align-self:flex-end;transform:translateX(6px)}
+    .anim-cm.show{opacity:1;transform:translateX(0)}
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-top">
+    <a class="nav-logo" href="#"><img src="https://app.nickradar.com/nr_logo.png" alt="nickradar" />nickradar</a>
+  </div>
+  <div class="nav-tabs">
+    <a class="nav-tab active" onclick="showPage('events', this)">events</a>
+    <a class="nav-tab green" href="https://app.nickradar.com" target="_blank">download app</a>
+  </div>
+</nav>
+
+<!-- ======== PAGE: EVENTS ======== -->
+<div class="page active" id="page-events">
+
+  <div class="hero">
+    <div class="hero-logo">nickradar</div>
+    <div class="hero-label"><strong style="color:#000;background:#00ff41;padding:0 4px;">the new vibrant contacting game</strong></div>
+    <div class="hero-sub" style="margin-bottom:24px;"><strong style="color:#000;background:#00ff41;padding:0 4px;">at your event location</strong></div>
+  </div>
+
+  <div class="black-section">
+    <div class="black-inner">
+      <div class="black-label">// <strong>for venues</strong></div>
+      <div class="black-title">are you an event organizer?</div>
+      <div class="black-sub">Bring the nickname party to your venue. Get in touch for more informations.</div>
+      <div class="black-types">FESTIVAL · CLUB · BAR · UNIVERSITY · PRIVATE EVENT</div>
+      <a class="black-btn" href="https://events.nickradar.com/" target="_blank">GO TO PARTNER AREA</a>
+    </div>
+  </div>
+
+  <footer>
+    <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:6px;">
+      <div style="font-size:14px;font-weight:700;letter-spacing:4px;color:#111;">nickradar</div>
+      
+    </div>
+    <div style="font-size:11px;color:#bbb;letter-spacing:2px;margin-bottom:8px;">&copy; 2026 nickradar &mdash; austria</div>
+    <div style="font-size:11px;color:#bbb;letter-spacing:2px;">
+      <button style="background:none;border:none;color:#bbb;font-family:var(--mono);font-size:11px;letter-spacing:2px;cursor:pointer;padding:0;" onclick="showPage('legal', null)">legal</button>
+    </div>
+  </footer>
+
+</div>
+
+<!-- ======== PAGE: LEGAL ======== -->
+<div class="page" id="page-legal">
+  <div class="section">
+    <div class="section-label">// legal</div>
+    <div class="section-title" style="margin-bottom:32px;">transparency<br>is non-negotiable.</div>
+
+    <div class="legal-nav">
+      <button class="legal-tab active" onclick="showLegal('impressum', event)">Imprint</button>
+      <button class="legal-tab" onclick="showLegal('datenschutz', event)">Privacy Policy</button>
+      <button class="legal-tab" onclick="showLegal('agb', event)">Terms of Service</button>
+    </div>
+
+    <!-- IMPRINT -->
+    <div class="legal-content active" id="legal-impressum">
+      <div class="legal-section">
+        <h3>Legal Disclosure pursuant to § 5 ECG (Austrian E-Commerce Act)</h3>
+        <p>nickradar.com — a Project of:<br><br>
+        Luigi La Macchia<br>Badhausstraße 3<br>6080 Innsbruck<br>Austria<br><br>
+        Email: <a href="#" onclick="window.location.href='mai'+'lto:info@nickradar.com';return false;"><span class="__cf_email__" data-cfemail="1970777f765977707a726b787d786b377a7674">[email&#160;protected]</span></a><br>
+        Web: <a href="https://www.nickradar.com">www.nickradar.com</a></p>
+      </div>
+      <div class="legal-section">
+        <h3>Business Purpose</h3>
+        <p>Operation of a digital contacting platform. nickradar facilitates contact attempts between registered users based on publicly visible nicknames.</p>
+      </div>
+      <div class="legal-section">
+        <h3>Supervisory Authority</h3>
+        <p>Magistrat der Landeshauptstadt Innsbruck<br>Maria-Theresien-Straße 18, 6020 Innsbruck, Austria</p>
+      </div>
+      <div class="legal-section">
+        <h3>Disclaimer</h3>
+        <p>The contents of this website have been created with the utmost care. However, we cannot guarantee the accuracy, completeness, or timeliness of the content. nickradar is not liable for content published or exchanged by users on the platform.</p>
+      </div>
+      <div class="legal-section">
+        <h3>Copyright</h3>
+        <p>All content published on this website is subject to Austrian copyright law. Any reproduction, editing, or distribution beyond the limits of copyright law requires the written consent of the respective author or creator.</p>
+      </div>
+      <div class="legal-section">
+        <h3>Online Dispute Resolution (EU)</h3>
+        <p>The European Commission provides a platform for online dispute resolution:<br>
+        <a href="https://ec.europa.eu/consumers/odr" target="_blank">https://ec.europa.eu/consumers/odr</a><br><br>
+        We are neither obligated nor willing to participate in dispute resolution proceedings before a consumer arbitration board.</p>
+      </div>
+    </div>
+
+    <!-- PRIVACY POLICY -->
+    <div class="legal-content" id="legal-datenschutz">
+      <div class="legal-section">
+        <h3>Controller</h3>
+        <p>nickradar, Austria — <a href="#" onclick="window.location.href='mai'+'lto:info@nickradar.com';return false;"><span class="__cf_email__" data-cfemail="deb7b0b8b19eb0b7bdb5acbfbabfacf0bdb1b3">[email&#160;protected]</span></a></p>
+      </div>
+      <div class="legal-section">
+        <h3>Data We Collect</h3>
+        <ul>
+          <li>Nickname, email address, date of birth upon registration</li>
+          <li>Optional profile information (bio, profile picture)</li>
+          <li>IP address upon registration (security purposes)</li>
+          <li>Location data at the time of each message sent</li>
+          <li>Payment data (event organizers only) exclusively via Stripe — we do not store full card details</li>
+          <li>Chat messages and location data — automatically and permanently deleted from our servers immediately after the chat ends (expired, denied, blocked or finished)</li>
+        </ul>
+      </div>
+      <div class="legal-section">
+        <h3>Data Retention (GDPR / DSGVO Art. 5)</h3>
+        <ul>
+          <li>Chat messages &amp; location data: deleted immediately after chat ends</li>
+          <li>Profile data (nickname, email): until account deletion</li>
+          <li>Payment data: 7 years (statutory obligation, Austria BAO §132)</li>
+          <li>Abuse reports: 3 years</li>
+        </ul>
+      </div>
+      <div class="legal-section">
+        <h3>Location Data</h3>
+        <p>Location data is collected exclusively at the time a message is sent and displayed to the chat partner. No continuous location tracking takes place.</p>
+      </div>
+      <div class="legal-section">
+        <h3>Legal Basis</h3>
+        <p>Art. 6(1)(b) GDPR (performance of contract) and Art. 6(1)(f) GDPR (legitimate interests). Location data is processed on the basis of explicit consent pursuant to Art. 6(1)(a) GDPR.</p>
+      </div>
+      <div class="legal-section">
+        <h3>Data Sharing</h3>
+        <p>No automatic sharing with third parties. Data is only exchanged between chat participants. Exception: location data is automatically transmitted within an active chat.</p>
+        <p>In cases involving criminal offences, data may be disclosed upon official request.</p>
+      </div>
+      <div class="legal-section">
+        <h3>Your Rights</h3>
+        <ul>
+          <li>Access (Art. 15), Rectification (Art. 16), Erasure (Art. 17)</li>
+          <li>Restriction (Art. 18), Objection (Art. 21 GDPR)</li>
+        </ul>
+        <p>Requests: <a href="#" onclick="window.location.href='mai'+'lto:info@nickradar.com';return false;"><span class="__cf_email__" data-cfemail="1871767e775876717b736a797c796a367b7775">[email&#160;protected]</span></a></p>
+      </div>
+      <div class="legal-section">
+        <h3>Third-Party Providers</h3>
+        <p><strong>Stripe</strong> for payment processing: <a href="https://stripe.com/privacy" target="_blank">stripe.com/privacy</a></p>
+      </div>
+      <div class="legal-section">
+        <h3>Data Security</h3>
+        <p>HTTPS encryption. Passwords hashed with bcrypt. JWT authentication.</p>
+      </div>
+    </div>
+
+    <!-- TERMS OF SERVICE -->
+    <div class="legal-content" id="legal-agb">
+      <div class="legal-section">
+        <h3>§ 1 Scope</h3>
+        <p>These Terms of Service apply to the use of nickradar (nickradar.com, app.nickradar.com). nickradar is a nickname contacting game for live events. By registering, you accept these terms in full.</p>
+      </div>
+      <div class="legal-section">
+        <h3>§ 2 Registration</h3>
+        <ul>
+          <li>Minimum age: 18 years</li>
+          <li>Registration and app download are free</li>
+          <li>One account per person</li>
+          <li>Nickname must be unique and non-offensive (max. 20 characters)</li>
+          <li>A valid email address is required</li>
+        </ul>
+      </div>
+      <div class="legal-section">
+        <h3>§ 3 Pricing and Payment</h3>
+        <ul>
+          <li>nickradar is completely free for party guests</li>
+          <li>Event organizers purchase token packages on events.nickradar.com — 1 token = 1 guest activation = EUR 1.00</li>
+          <li>Minimum purchase: 50 tokens</li>
+          <li>Token purchases are processed exclusively via Stripe (B2B)</li>
+          <li>No subscriptions, no hidden costs</li>
+          <li>nickradar reserves the right to adjust prices at any time. Registered users will be informed in advance.</li>
+        </ul>
+      </div>
+      <div class="legal-section">
+        <h3>§ 4 Contacting Rules</h3>
+        <ul>
+          <li>Requests remain active for 12 hours</li>
+          <li>A mutual YES opens a 48-hour chat</li>
+          <li>NO: permanent mutual block — no further interactions possible</li>
+          <li>EXPIRED (no reply): no cost — both parties may send new requests</li>
+          <li>No reply does not count as rejection</li>
+          <li>Chat messages and location data are permanently deleted from our servers immediately after the chat ends — regardless of the reason (expired, denied, blocked or finished)</li>
+        </ul>
+      </div>
+      <div class="legal-section">
+        <h3>§ 5 Community Rules</h3>
+        <ul>
+          <li>No harassment, no spam, no abuse</li>
+          <li>No false information about yourself</li>
+          <li>No commercial activities without permission</li>
+          <li>No sharing of illegal or discriminatory content</li>
+          <li>Each user is responsible for their messages and profile content</li>
+          <li>Violations result in immediate and permanent account suspension</li>
+        </ul>
+      </div>
+      <div class="legal-section">
+        <h3>§ 6 Awareness and Personal Responsibility</h3>
+        <p>By displaying a nickradar nickname sticker at an event, the user agrees to being contactable via nickradar within that event context. nickradar is not liable for events that occur between users. Each user acts at their own responsibility.</p>
+      </div>
+      <div class="legal-section">
+        <h3>§ 7 Platform Liability</h3>
+        <p>nickradar provides technical infrastructure only. nickradar is not a party to contacts between users and is not liable for any resulting damages.</p>
+      </div>
+      <div class="legal-section">
+        <h3>§ 8 Termination and Deletion</h3>
+        <p>Account can be deleted at any time in the app. All data is permanently deleted after account deletion. Re-registration is possible at any time — however, the original nickname may already be taken. nickradar reserves the right to suspend accounts for violations without prior notice.</p>
+      </div>
+      <div class="legal-section">
+        <h3>§ 9 Applicable Law</h3>
+        <p>Austrian law applies. Place of jurisdiction: Austria.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:6px;">
+      <div style="font-size:14px;font-weight:700;letter-spacing:4px;color:#111;">nickradar</div>
+    </div>
+    <div style="font-size:11px;color:#bbb;letter-spacing:2px;margin-bottom:8px;">&copy; 2026 nickradar &mdash; austria</div>
+  </footer>
+</div>
+
+<script>
+function showPage(id, tab) {
+  document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+  document.querySelectorAll('.nav-tab:not(.green)').forEach(function(t) { t.classList.remove('active'); });
+  document.getElementById('page-' + id).classList.add('active');
+  if (tab) tab.classList.add('active');
+  window.scrollTo(0, 0);
+  if (id === 'life' && typeof lifeAnimStart === 'function') lifeAnimStart();
+  if (typeof umami !== 'undefined') umami.track('page', { name: id });
+}
+function showLegal(id, e) {
+  if (e) e.preventDefault();
+  document.querySelectorAll('.legal-content').forEach(function(c) { c.classList.remove('active'); });
+  document.querySelectorAll('.legal-tab').forEach(function(t) { t.classList.remove('active'); });
+  document.getElementById('legal-' + id).classList.add('active');
+  if (e && e.target) e.target.classList.add('active');
+}
+</script>
+<script>
+(function(){
+  var cur=1,timers=[],chatTick=null;
+  var DUR=[11000,10000,13000,9000];
+  function pad(n){return String(n).padStart(2,'0');}
+  function kill(){timers.forEach(function(t){clearTimeout(t);clearInterval(t);});timers=[];if(chatTick){clearInterval(chatTick);chatTick=null;}}
+  function after(ms,fn){var t=setTimeout(fn,ms);timers.push(t);}
+  function ashow(id,delay){var el=document.getElementById(id);if(!el)return;el.classList.remove('show');after(delay,function(){el.classList.add('show');});}
+  function goToA(n){
+    kill();
+    var prev=document.getElementById('as'+cur);if(prev)prev.classList.remove('active');
+    cur=n;
+    var next=document.getElementById('as'+n);if(next)next.classList.add('active');
+    document.querySelectorAll('.anim-dot').forEach(function(d,i){d.classList.remove('active','done');if(i+1===n)d.classList.add('active');else if(i+1<n)d.classList.add('done');});
+    var bar=document.getElementById('apbar');
+    if(bar){bar.style.transition='none';bar.style.width='0%';requestAnimationFrame(function(){requestAnimationFrame(function(){bar.style.transition='width '+DUR[n-1]+'ms linear';bar.style.width='100%';});});}
+    [null,as1,as2,as3,as4][n]();
+    after(DUR[n-1],function(){goToA(n<4?n+1:1);});
+  }
+  function as1(){
+    var el=document.getElementById('as1-sticker');if(el)el.classList.remove('show');
+    ashow('as1-lbl',200);
+    after(400,function(){var el=document.getElementById('as1-sticker');if(el)el.classList.add('show');});
+    ashow('as1-txt',1400);
+  }
+  function as2(){
+    var typed=document.getElementById('as2-typed');
+    var res=document.getElementById('as2-res');
+    var btn=document.getElementById('as2-btn');
+    if(typed)typed.textContent='';
+    if(res)res.classList.remove('show');
+    if(btn)btn.classList.remove('show');
+    ashow('as2-lbl',200);
+    after(600,function(){
+      var text='lisa_berlin',i=0;
+      var t=setInterval(function(){if(typed)typed.textContent+=text[i];i++;if(i>=text.length){clearInterval(t);after(300,function(){if(res)res.classList.add('show');});after(700,function(){if(btn)btn.classList.add('show');});}},120);
+      timers.push(t);
+    });
+    ashow('as2-txt',2800);
+  }
+  function as3(){
+    var card=document.getElementById('as3-card');
+    var yes=document.getElementById('as3-yes');
+    var match=document.getElementById('as3-match');
+    if(card)card.classList.remove('show');
+    if(yes)yes.classList.remove('lit');
+    if(match)match.classList.remove('show');
+    ashow('as3-lbl',200);
+    after(400,function(){if(card)card.classList.add('show');});
+    ashow('as3-txt',1200);
+    after(3800,function(){if(yes)yes.classList.add('lit');});
+    after(7000,function(){
+      if(match)match.classList.add('show');
+      var l=document.getElementById('as3-lbl');if(l)l.classList.remove('show');
+      var t=document.getElementById('as3-txt');if(t)t.classList.remove('show');
+    });
+  }
+  function as4(){
+    ['am1','am2','am3'].forEach(function(id){var el=document.getElementById(id);if(el)el.classList.remove('show');});
+    ashow('as4-lbl',200);
+    ashow('am1',800);ashow('am2',2400);ashow('am3',4000);
+    ashow('as4-txt',5500);
+    var secs=47*3600+59*60+58;
+    var el=document.getElementById('as4-timer');
+    chatTick=setInterval(function(){secs--;if(el)el.textContent=pad(Math.floor(secs/3600))+':'+pad(Math.floor((secs%3600)/60))+':'+pad(secs%60);},1000);
+  }
+  lifeAnimStart = function(){ goToA(1); };
+})();
+</script>
+<script defer src="https://analytics.nickradar.com/script.js" data-website-id="00d87254-9494-4939-a633-840abf0f574b"></script>
+</body>
+</html>
