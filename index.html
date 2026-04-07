@@ -268,18 +268,22 @@
       <button class="legal-tab" onclick="showLegal('agb', event)">Terms of Service</button>
     </div>
 
-    <!-- IMPRINT -->
+        <!-- IMPRINT -->
     <div class="legal-content active" id="legal-impressum">
       <div class="legal-section">
         <h3>Legal Disclosure pursuant to § 5 ECG (Austrian E-Commerce Act)</h3>
         <p>nickradar.com — a Project of:<br><br>
-        Luigi La Macchia<br>Badhausstraße 3<br>6080 Innsbruck<br>Austria<br><br>
-        Email: <a href="#" onclick="window.location.href='mai'+'lto:info@nickradar.com';return false;"><span class="__cf_email__" data-cfemail="1970777f765977707a726b787d786b377a7674">[email&#160;protected]</span></a><br>
+        Luigi La Macchia<br>Badhausstraße 3<br>6080 Innsbruck-Igls<br>Austria<br><br>
+        Email: <a href="#" onclick="window.location.href='mai'+'lto:info@nickradar.com';return false;">info@nickradar.com</a><br>
         Web: <a href="https://www.nickradar.com">www.nickradar.com</a></p>
       </div>
       <div class="legal-section">
         <h3>Business Purpose</h3>
-        <p>Operation of a digital contacting platform. nickradar facilitates contact attempts between registered users based on publicly visible nicknames.</p>
+        <p>Operation of a digital connecting platform for live events. nickradar provides event organizers with a B2B tool that enables guests to connect with each other during events using nickname stickers.</p>
+      </div>
+      <div class="legal-section">
+        <h3>VAT</h3>
+        <p>Pursuant to § 6 Abs. 1 Z 27 UStG (Austrian VAT Act), no VAT is charged (small business regulation / Kleinunternehmerregelung).</p>
       </div>
       <div class="legal-section">
         <h3>Supervisory Authority</h3>
@@ -287,74 +291,87 @@
       </div>
       <div class="legal-section">
         <h3>Disclaimer</h3>
-        <p>The contents of this website have been created with the utmost care. However, we cannot guarantee the accuracy, completeness, or timeliness of the content. nickradar is not liable for content published or exchanged by users on the platform.</p>
+        <p>The contents of this website have been created with the utmost care. nickradar is not liable for content exchanged between participants on the platform, nor for the organization or conduct of events by Event Admins.</p>
       </div>
       <div class="legal-section">
         <h3>Copyright</h3>
-        <p>All content published on this website is subject to Austrian copyright law. Any reproduction, editing, or distribution beyond the limits of copyright law requires the written consent of the respective author or creator.</p>
+        <p>All content published on this website is subject to Austrian copyright law. Any reproduction, editing, or distribution requires the written consent of nickradar.</p>
       </div>
       <div class="legal-section">
         <h3>Online Dispute Resolution (EU)</h3>
         <p>The European Commission provides a platform for online dispute resolution:<br>
         <a href="https://ec.europa.eu/consumers/odr" target="_blank">https://ec.europa.eu/consumers/odr</a><br><br>
-        We are neither obligated nor willing to participate in dispute resolution proceedings before a consumer arbitration board.</p>
+        As nickradar operates exclusively as a B2B service, we are neither obligated nor willing to participate in consumer dispute resolution proceedings.</p>
       </div>
     </div>
 
-    <!-- PRIVACY POLICY -->
+        <!-- PRIVACY POLICY -->
     <div class="legal-content" id="legal-datenschutz">
       <div class="legal-section">
         <h3>Controller</h3>
-        <p>nickradar, Austria — <a href="#" onclick="window.location.href='mai'+'lto:info@nickradar.com';return false;"><span class="__cf_email__" data-cfemail="deb7b0b8b19eb0b7bdb5acbfbabfacf0bdb1b3">[email&#160;protected]</span></a></p>
+        <p>Luigi La Macchia — nickradar<br>Badhausstraße 3, 6080 Innsbruck-Igls, Austria<br>
+        Email: <a href="#" onclick="window.location.href='mai'+'lto:info@nickradar.com';return false;">info@nickradar.com</a></p>
       </div>
       <div class="legal-section">
-        <h3>Data We Collect</h3>
+        <h3>Two Distinct User Groups</h3>
+        <p>nickradar processes data for two separate groups: <strong>Event Admins</strong> (B2B customers who purchase sticker packages and manage events) and <strong>Participants</strong> (guests who use the app during an event). Different data is collected and retained for each group.</p>
+      </div>
+      <div class="legal-section">
+        <h3>Data Collected — Event Admins</h3>
         <ul>
-          <li>Nickname, email address, date of birth upon registration</li>
-          <li>Optional profile information (bio, profile picture)</li>
-          <li>IP address upon registration (security purposes)</li>
-          <li>Location data at the time of each message sent</li>
-          <li>Payment data (event organizers only) exclusively via Stripe — we do not store full card details</li>
-          <li>Chat messages and location data — automatically and permanently deleted from our servers immediately after the chat ends (expired, denied, blocked or finished)</li>
+          <li>Organization name, billing address, VAT number (for invoicing)</li>
+          <li>Contact person name and phone number</li>
+          <li>Email address and password (hashed)</li>
+          <li>Payment data processed exclusively via Stripe — nickradar does not store full card details</li>
+          <li>Invoice and order history</li>
         </ul>
       </div>
       <div class="legal-section">
-        <h3>Data Retention (GDPR / DSGVO Art. 5)</h3>
+        <h3>Data Collected — Participants</h3>
         <ul>
-          <li>Chat messages &amp; location data: deleted immediately after chat ends</li>
-          <li>Profile data (nickname, email): until account deletion</li>
-          <li>Payment data: 7 years (statutory obligation, Austria BAO §132)</li>
-          <li>Abuse reports: 3 years</li>
+          <li>4-digit entry code (linked to a nickname and event)</li>
+          <li>Optional profile photo and slogan</li>
+          <li>Session token and IP address (for session management only)</li>
+          <li>Chat messages (deleted immediately after event ends)</li>
+          <li>Connection requests and responses (deleted immediately after event ends)</li>
         </ul>
+        <p style="margin-top:8px;">Participants do not register with an email address or password. No personal account exists beyond the event session.</p>
       </div>
       <div class="legal-section">
-        <h3>Location Data</h3>
-        <p>Location data is collected exclusively at the time a message is sent and displayed to the chat partner. No continuous location tracking takes place.</p>
+        <h3>Data Retention (GDPR Art. 5)</h3>
+        <ul>
+          <li>Participant messages, sessions, codes: <strong>deleted immediately after event ends</strong></li>
+          <li>Participant profile photos and slogans: <strong>deleted immediately after event ends</strong></li>
+          <li>Event Admin account data: until account deletion</li>
+          <li>Billing and invoice data: 7 years (Austrian tax law, BAO §132)</li>
+          <li>Abuse reports: retained as long as necessary for handling</li>
+        </ul>
       </div>
       <div class="legal-section">
         <h3>Legal Basis</h3>
-        <p>Art. 6(1)(b) GDPR (performance of contract) and Art. 6(1)(f) GDPR (legitimate interests). Location data is processed on the basis of explicit consent pursuant to Art. 6(1)(a) GDPR.</p>
+        <p>Event Admin data: Art. 6(1)(b) GDPR (performance of contract) and Art. 6(1)(c) GDPR (legal obligation for invoicing).<br>
+        Participant data: Art. 6(1)(b) GDPR (performance of contract — event session) and Art. 6(1)(f) GDPR (legitimate interest in platform security).</p>
       </div>
       <div class="legal-section">
         <h3>Data Sharing</h3>
-        <p>No automatic sharing with third parties. Data is only exchanged between chat participants. Exception: location data is automatically transmitted within an active chat.</p>
-        <p>In cases involving criminal offences, data may be disclosed upon official request.</p>
+        <p>nickradar does not share personal data with third parties, except where required by law. Stripe processes payment data under their own privacy policy: <a href="https://stripe.com/privacy" target="_blank">stripe.com/privacy</a>. In cases involving criminal offences, data may be disclosed upon official request.</p>
       </div>
       <div class="legal-section">
         <h3>Your Rights</h3>
         <ul>
           <li>Access (Art. 15), Rectification (Art. 16), Erasure (Art. 17)</li>
-          <li>Restriction (Art. 18), Objection (Art. 21 GDPR)</li>
+          <li>Restriction of processing (Art. 18), Objection (Art. 21 GDPR)</li>
+          <li>Data portability (Art. 20 GDPR)</li>
         </ul>
-        <p>Requests: <a href="#" onclick="window.location.href='mai'+'lto:info@nickradar.com';return false;"><span class="__cf_email__" data-cfemail="1871767e775876717b736a797c796a367b7775">[email&#160;protected]</span></a></p>
+        <p>Requests: <a href="#" onclick="window.location.href='mai'+'lto:info@nickradar.com';return false;">info@nickradar.com</a></p>
       </div>
       <div class="legal-section">
-        <h3>Third-Party Providers</h3>
-        <p><strong>Stripe</strong> for payment processing: <a href="https://stripe.com/privacy" target="_blank">stripe.com/privacy</a></p>
+        <h3>Analytics</h3>
+        <p>This website uses Umami Analytics — a privacy-friendly, cookie-free analytics tool hosted on our own server. No personal data is transmitted to third parties.</p>
       </div>
       <div class="legal-section">
         <h3>Data Security</h3>
-        <p>HTTPS encryption. Passwords hashed with bcrypt. JWT authentication.</p>
+        <p>All connections are encrypted via HTTPS. Passwords are hashed with bcrypt. Sessions use secure random tokens. Participant data is automatically and permanently deleted at event end.</p>
       </div>
     </div>
 
@@ -362,7 +379,7 @@
     <div class="legal-content" id="legal-agb">
       <div class="legal-section">
         <h3>§ 1 Scope and Contracting Parties</h3>
-        <p>These Terms of Service govern the use of the nickradar B2B platform (events.nickradar.com) by event organizers ("Event Admin"). The service is provided by Luigi La Macchia, Badhausstrasse 3, 6080 Innsbruck-Igls, Austria ("nickradar"). By registering as an Event Admin, you accept these terms in full. These terms apply exclusively to business customers (B2B). The use of the platform by consumers is not permitted.</p>
+        <p>These Terms of Service govern the use of the nickradar B2B platform (events.nickradar.com) by event organizers ("Event Admin"). The service is provided by Luigi La Macchia, Badhausstraße 3, 6080 Innsbruck-Igls, Austria ("nickradar"). By registering as an Event Admin, you accept these terms in full. These terms apply exclusively to business customers (B2B). The use of the platform by consumers is not permitted.</p>
       </div>
       <div class="legal-section">
         <h3>§ 2 The Service</h3>
