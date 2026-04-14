@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="nickradar — digital connecting tool for live events. guests connect anonymously using nickname stickers. no algorithm, no swiping.">
-  <meta name="keywords" content="nickradar, connecting tool, nickname sticker, live events, austria, anonymous, no swiping">
+  <meta name="description" content="nickradar — digital connecting tool for live events. guests connect anonymously using nickname stickers. ">
+  <meta name="keywords" content="nickradar, connecting tool, nickname sticker, live events, austria, anonymous">
   <meta name="author" content="nickradar">
   <meta name="robots" content="index, follow">
   <meta property="og:title" content="nickradar — digital connecting tool for live events">
@@ -195,12 +195,12 @@
     .anim-btn-yes{flex:1;padding:11px;text-align:center;font-family:'Share Tech Mono',monospace;font-size:14px;font-weight:900;letter-spacing:3px;background:#000;color:#fff;border:2px solid #00ff41;transition:all .3s}
     .anim-btn-yes.lit{background:#00ff41;color:#000;box-shadow:0 0 20px rgba(0,255,65,.4)}
     .anim-btn-no{flex:1;padding:11px;text-align:center;font-family:'Share Tech Mono',monospace;font-size:14px;letter-spacing:3px;color:#1a4d1a;border:1px solid #1a4d1a}
-    .anim-match{position:absolute;inset:0;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;opacity:0;pointer-events:none;transition:opacity .4s;z-index:5}
-    .anim-match.show{opacity:1}
-    .anim-match-word{font-size:52px;font-weight:900;letter-spacing:10px;color:#00ff41;text-shadow:0 0 40px rgba(0,255,65,.5);transform:scale(.8);transition:transform .4s cubic-bezier(.34,1.56,.64,1) .1s}
-    .anim-match.show .anim-match-word{transform:scale(1)}
-    .anim-match-sub{font-size:12px;letter-spacing:3px;color:#fff;font-weight:700;opacity:0;transition:opacity .4s ease .4s}
-    .anim-match.show .anim-match-sub{opacity:1}
+    .anim-connected{position:absolute;inset:0;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;opacity:0;pointer-events:none;transition:opacity .4s;z-index:5}
+    .anim-connected.show{opacity:1}
+    .anim-connected-word{font-size:52px;font-weight:900;letter-spacing:10px;color:#00ff41;text-shadow:0 0 40px rgba(0,255,65,.5);transform:scale(.8);transition:transform .4s cubic-bezier(.34,1.56,.64,1) .1s}
+    .anim-connected.show .anim-connected-word{transform:scale(1)}
+    .anim-connected-sub{font-size:12px;letter-spacing:3px;color:#fff;font-weight:700;opacity:0;transition:opacity .4s ease .4s}
+    .anim-connected.show .anim-connected-sub{opacity:1}
     .anim-chat{width:280px}
     .anim-chat-head{background:#000;border:1px solid #00ff41;padding:9px 12px;display:flex;justify-content:space-between;align-items:center}
     .anim-chat-nick{font-size:13px;color:#fff;font-weight:700;letter-spacing:2px}
@@ -539,16 +539,16 @@ function showLegal(id, e) {
   function as3(){
     var card=document.getElementById('as3-card');
     var yes=document.getElementById('as3-yes');
-    var match=document.getElementById('as3-match');
+    var connected=document.getElementById('as3-connected');
     if(card)card.classList.remove('show');
     if(yes)yes.classList.remove('lit');
-    if(match)match.classList.remove('show');
+    if(connected)connected.classList.remove('show');
     ashow('as3-lbl',200);
     after(400,function(){if(card)card.classList.add('show');});
     ashow('as3-txt',1200);
     after(3800,function(){if(yes)yes.classList.add('lit');});
     after(7000,function(){
-      if(match)match.classList.add('show');
+      if(connected)connected.classList.add('show');
       var l=document.getElementById('as3-lbl');if(l)l.classList.remove('show');
       var t=document.getElementById('as3-txt');if(t)t.classList.remove('show');
     });
